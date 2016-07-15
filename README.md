@@ -8,4 +8,5 @@ $ RACK_ENV=production rbenv exec bundle exec rackup
 (上記の起動コマンドだけ書かれてても何のことやらと思っていたけど作る側に回るとこれくらいしか書くことがない…)
 
 本ソフトウェアは59t9が著作権を保持するものの、MITライセンスを採用しています。
-https://github.com/59t9/radiocloud_rss/LICENSE
+
+https://github.com/59t9/radiocloud_rss/blob/master/LICENSE
