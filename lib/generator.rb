@@ -44,7 +44,7 @@ class GeneratorApp
       dom = get_dom(url_base)
       arr_tuneinfo = get_tune_info(dom,url_base)
       rss = PodcastRssGenerator.new
-      location = req.scheme + '://' + req.host + ':' + req.port + '/'
+      location = req.scheme + '://' + req.host + ':' + req.port.to_s + '/'
       [200, {}, [rss.make(prg, location, arr_tuneinfo)]]
     else
       [404, {}, ["Not Found"]]
