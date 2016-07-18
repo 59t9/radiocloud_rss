@@ -8,8 +8,7 @@ class PodcastRssGenerator
   def initialize
   end
   
-  def make(title, arr_tuneinfo)
-    location = "http://59t9.mydns.jp:8000/"
+  def make(title, location, arr_tuneinfo)
     
     urls = arr_tuneinfo.map do |filename, caption, time, tuneurl, refsite|
       path = filename + '?' + 'tuneid=' + tuneurl + '&amp;' + 'refsite=' + refsite + '&amp;' + 'filename=' + filename
