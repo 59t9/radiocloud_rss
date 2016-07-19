@@ -10,7 +10,7 @@ module RadioCloud
   end
   
   def get_title(dom)
-    dom.xpath('//div[@id="left"]///div[@class="program_info"]/h2').inner_text.strip
+    dom.xpath('//div[@id="left"]//div[@class="program_info"]/h2').inner_text.strip
   end
   
   def get_tune_info(dom)
