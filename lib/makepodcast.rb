@@ -8,14 +8,27 @@ class PodcastRssGenerator
   def initialize
   end
   
+  def get_time_length(tuneurl, refsite, defaulttime)
+    dom, cookie = get_dom_ref(tuneurl, refsite)
+    src = get_tune_src(dom)
+    url = 'https:' + src
+    adp = cookie['AD-P']
+    if src.nil? or adp.nil? then
+      return {:time => defaulttime, :length => '0'}
+    end
+    res = header_cookie(url,adp)
+    return {:time => res['last-modified'], :length => res['content-length']}
+  end
+  
   def make(title, location, arr_tuneinfo)
     
     urls = arr_tuneinfo.map do |filename, caption, time, tuneurl, refsite|
       path = filename + '?' + 'tuneid=' + tuneurl + '&amp;' + 'refsite=' + refsite + '&amp;' + 'filename=' + filename
+      time_length = get_time_length(tuneurl, refsite, time)
       { 'name'   => caption,
         'fname'  => path,
-        'time'   => Time.parse(time),
-        'length' => '0' # tentative, but not available by iTunes
+        'time'   => Time.parse(time_length[:time]),
+        'length' => time_length[:length]
       }
     end
     
