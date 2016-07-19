@@ -20,9 +20,9 @@ class PodcastRssGenerator
     return {:time => res['last-modified'], :length => res['content-length']}
   end
   
-  def make(title, location, arr_tuneinfo)
+  def make(title, location, refsite, arr_tuneinfo)
     
-    urls = arr_tuneinfo.map do |filename, caption, time, tuneurl, refsite|
+    urls = arr_tuneinfo.map do |filename, caption, time, tuneurl|
       path = filename + '?' + 'tuneid=' + tuneurl + '&amp;' + 'refsite=' + refsite + '&amp;' + 'filename=' + filename
       time_length = get_time_length(tuneurl, refsite, time)
       { 'name'   => caption,

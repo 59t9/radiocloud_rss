@@ -9,7 +9,11 @@ module RadioCloud
     return  Nokogiri::HTML.parse(res)
   end
   
-  def get_tune_info(dom,refsite)
+  def get_title(dom)
+    dom.xpath('//div[@id="left"]///div[@class="program_info"]/h2').inner_text.strip
+  end
+  
+  def get_tune_info(dom)
     count = 0
     dom.xpath('//div[@id="contents_open"]//li[@class="contents_box"]').map do |node|
       time = node.xpath('dl/dt').inner_text.strip
@@ -19,7 +23,7 @@ module RadioCloud
       filename = day + '_' + count.to_s + '.mp3'
       count +=1
       tuneurl = url = 'https:' + node.xpath('input[@name="file_url"]/@value').inner_text + '/'
-      [filename, caption, time, tuneurl, refsite]
+      [filename, caption, time, tuneurl]
     end
   end
   

@@ -42,10 +42,11 @@ class GeneratorApp
       end
       url_base = 'https://radiocloud.jp/archive/' + prg + '/'
       dom = get_dom(url_base)
-      arr_tuneinfo = get_tune_info(dom,url_base)
+      title = get_title(dom)
+      arr_tuneinfo = get_tune_info(dom)
       rss = PodcastRssGenerator.new
       location = req.scheme + '://' + req.host + ':' + req.port.to_s + '/'
-      [200, {}, [rss.make(prg, location, arr_tuneinfo)]]
+      [200, {}, [rss.make(prg, location, url_base, arr_tuneinfo)]]
     else
       [404, {}, ["Not Found"]]
     end
