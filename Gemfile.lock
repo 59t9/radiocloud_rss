@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/sinatra/sinatra.git
-  revision: a5da6fa82c46436f59ae482d07c1752ab908c852
+  revision: 03c03d7e169954185b008253f8bf2f9068198ca3
   specs:
     sinatra (2.0.0.pre.alpha)
       mustermann (~> 0.4)
@@ -40,8 +40,9 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     ntlm-http (0.1.1)
+    parallel (1.9.0)
     pkg-config (1.1.7)
-    puma (3.4.0)
+    puma (3.5.0)
     rack (2.0.1)
     rack-cache (1.6.1)
       rack (>= 0.4)
@@ -65,6 +66,7 @@ DEPENDENCIES
   httparty
   mechanize
   nokogiri
+  parallel
   puma
   rack
   rack-cache
