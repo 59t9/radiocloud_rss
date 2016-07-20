@@ -2,6 +2,21 @@
 <head>
 <title>「ラジオクラウド」RSS</title>
 <meta name="cat-mdes-site-73334572" content="bc346f39-adb0-47d2-9b9a-6ea4e0af0f93">
+<script language=javascript>
+<!--
+function show(inputData){
+    var objID=document.getElementById( "layer_" + inputData );
+    var buttonID=document.getElementById( "category_" + inputData );
+    if(objID.className=='close') {
+        objID.style.display='block';
+        objID.className='open';
+    }else{
+        objID.style.display='none';
+        objID.className='close';
+    }
+}
+//-->
+</script>
 </head>
 <body>
 <h2>「ラジオクラウド」＜非公認＞RSSフィードジェネレータ</h2>
@@ -44,8 +59,8 @@ TBSとは全く関係がありません。ですので御使用の面で不都�
 </ul>
 </div>
 <hr />
-<div>
-<h3>こぼれ話</h3>
+<h3><a href="javascript:void(0)" id="category_foldA" onclick="show('foldA');">こぼれ話</a></h3>
+<div id="layer_foldA" style="display: none;position:relative" class="close">
 <p>エピソードは独立したMP3データであり、一意のURLによってダウンロードできますが、その際にあるクッキーが参照されます。このクッキーを取得する手続きがMP3ダウンロードの前段に必要となるため、CGIを動かしてMP3データを返します。</p>
 <p>MP3を取得するだけのrubyスクリプトの例を<a href="https://gist.github.com/59t9/97f2976f18c22fa59d9651567e2e3430">gist</a>に上げています。本サイトはこのpodcast対応です。</p>
 <p>podcastクライアントがwebブラウザのようにjavascriptを実行可能であれば、MP3取得をpodcastクライアントに任せることができるのですが、一般的にはそれは望めないので本サイトがMP3ダウンロードを代行する形を採っています。この代行動作がTBSの<a href="http://www.tbs.co.jp/company/rights.html">『著作権とリンク』</a>にあるような「転載」に該当するか、またpodcastのrssフィードを作成することそのものが「私的な利用」を逸脱しているか、悩ましいのです。しかしMP3データを他サイトにアップロードするようなケースとは一線を画しているつもりです。その意味でキャッシュも設置しておりません。</p>
