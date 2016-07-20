@@ -10,4 +10,4 @@ gem 'rack-contrib'
 gem 'rack-cache'
 gem 'puma'
 gem 'sinatra', github: 'sinatra/sinatra'
-
+gem 'parallel'
