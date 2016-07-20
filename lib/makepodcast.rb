@@ -8,6 +8,10 @@ class PodcastRssGenerator
   include RadioCloud
   def initialize
   end
+
+  def episodes_limit
+    10
+  end
   
   def get_time_length(tuneurl, refsite, defaulttime)
     dom, cookie = get_dom_ref(tuneurl, refsite)
@@ -23,7 +27,7 @@ class PodcastRssGenerator
   
   def make(title, location, refsite, arr_tuneinfo)
     urls = []
-    Parallel.map(arr_tuneinfo, in_threads: 4) do |filename, caption, time, tuneurl|
+    Parallel.map(arr_tuneinfo[0...episodes_limit], in_threads: 4) do |filename, caption, time, tuneurl|
       path = filename + '?' + 'tuneid=' + tuneurl + '&amp;' + 'refsite=' + refsite + '&amp;' + 'filename=' + filename
       time_length = get_time_length(tuneurl, refsite, time)
       item = { 'name'   => caption,
