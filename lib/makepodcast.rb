@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'time'
+require 'parallel'
 require './lib/radiocloud'
 
 class PodcastRssGenerator
@@ -21,15 +22,16 @@ class PodcastRssGenerator
   end
   
   def make(title, location, refsite, arr_tuneinfo)
-    
-    urls = arr_tuneinfo.map do |filename, caption, time, tuneurl|
+    urls = []
+    Parallel.map(arr_tuneinfo, in_threads: 4) do |filename, caption, time, tuneurl|
       path = filename + '?' + 'tuneid=' + tuneurl + '&amp;' + 'refsite=' + refsite + '&amp;' + 'filename=' + filename
       time_length = get_time_length(tuneurl, refsite, time)
-      { 'name'   => caption,
+      item = { 'name'   => caption,
         'fname'  => path,
         'time'   => Time.parse(time_length[:time]),
         'length' => time_length[:length]
       }
+      urls << item
     end
     
     urls = urls.sort do |a, b|
