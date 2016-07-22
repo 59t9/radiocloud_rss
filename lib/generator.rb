@@ -23,7 +23,7 @@ class GeneratorApp
         return [404, {}, ["Not Found"]]
       end
       Rack::Response.new do |res|
-        res.set_cookie('AD-P') = cookie['AD-P']
+        res.set_cookie('AD-P', cookie['AD-P'])
         res.redirect(url)
       end
 #      if req.head? then
