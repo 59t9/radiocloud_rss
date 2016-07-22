@@ -22,23 +22,19 @@ class GeneratorApp
       if src.nil? or adp.nil? then
         return [404, {}, ["Not Found"]]
       end
-      Rack::Response.new do |res|
-        res['AD-P'] = cookie['AD-P']
-        res.redirect(url)
+      if req.head? then
+        res = header_cookie(url,adp)
+        #res.each{|k,v|
+        #  p "#{k} : #{v}"
+        #}
+        Rack::Response.new(body=[], status=res.code, header=res)
+      elsif req.get? then
+        res = body_cookie(url,adp,range)
+        #res.each{|k,v|
+        #  p "#{k} : #{v}"
+        #}
+        Rack::Response.new(body=res.body, status=res.code, header=res.header)
       end
-#      if req.head? then
-#        res = header_cookie(url,adp)
-#        #res.each{|k,v|
-#        #  p "#{k} : #{v}"
-#        #}
-#        Rack::Response.new(body=[], status=res.code, header=res)
-#      elsif req.get? then
-#        res = body_cookie(url,adp,range)
-#        #res.each{|k,v|
-#        #  p "#{k} : #{v}"
-#        #}
-#        Rack::Response.new(body=res.body, status=res.code, header=res.header)
-#      end
     elsif req.path.rpartition('/')[-1] == 'podcast'
       prg = req['program']
       if prg.nil? then
