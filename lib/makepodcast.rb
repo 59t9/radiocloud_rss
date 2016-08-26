@@ -22,7 +22,7 @@ class PodcastRssGenerator
       return {:time => defaulttime, :length => '0'}
     end
     res = header_cookie(url,adp)
-    return {:time => res['last-modified'], :length => res['content-length']}
+    return {:time => res['last-modified'] or defaulttime, :length => res['content-length'] or 0}
   end
   
   def make(title, location, refsite, arr_tuneinfo)
