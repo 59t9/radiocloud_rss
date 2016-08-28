@@ -17,19 +17,19 @@ class GeneratorApp
       range = req.env['HTTP_RANGE'] # partial content request
       dom, cookie = get_dom_ref(url, ref)
       src = get_tune_src(dom)
-      url = 'https:' + src
+      url2 = 'https:' + src
       adp = cookie['AD-P']
       if src.nil? or adp.nil? then
         return [404, {}, ["Not Found"]]
       end
       if req.head? then
-        res = header_cookie(url,adp)
+        res = header_ref_cookie(url2,url,adp)
         #res.each{|k,v|
         #  p "#{k} : #{v}"
         #}
         Rack::Response.new(body=[], status=res.code, header=res)
       elsif req.get? then
-        res = body_cookie(url,adp,range)
+        res = body_ref_cookie(url2,url,adp,range)
         #res.each{|k,v|
         #  p "#{k} : #{v}"
         #}
