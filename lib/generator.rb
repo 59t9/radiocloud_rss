@@ -8,7 +8,7 @@ class GeneratorApp
   include RadioCloud
   def call(env)
     req = Rack::Request.new(env)
-    if req.path.rpartition('/')[-1].rpartition('.')[-1].downcase == 'mp3' then
+    if req.path.rpartition('/')[-1].rpartition('.')[-1].downcase == 'm4a' then
       url = req['tuneid']
       ref = req['refsite']
       if url.nil? or ref.nil? then
