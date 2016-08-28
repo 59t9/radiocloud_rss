@@ -51,7 +51,7 @@ EOS
     
     urls.each do |item|
       url = location + item['fname']
-      mime = 'audio/mp3'
+      mime = 'audio/mp4'
       
       html += <<-EOS
     <item>
