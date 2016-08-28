@@ -20,7 +20,7 @@ module RadioCloud
       day = time.gsub(/\./ , '_')
       day2 = time.gsub(/\./ , '.')
       caption = day2 + ' ' +node.xpath('dl/dd/span').inner_text.strip
-      filename = day + '_' + count.to_s + '.mp3'
+      filename = day + '_' + count.to_s + '.m4a'
       count +=1
       tuneurl = url = 'https:' + node.xpath('input[@name="file_url"]/@value').inner_text + '/'
       [filename, caption, time, tuneurl]
