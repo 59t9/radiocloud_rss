@@ -82,4 +82,37 @@ module RadioCloud
     return res
   end
 
+def header_ref_cookie(url, ref, adp)
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+#    http.set_debug_output $stderr
+    http.start()
+    req = Net::HTTP::Head.new uri
+    req['Cookie'] = "AD-P=#{adp}"
+    req['Referer'] = ref
+    res = http.request(req)
+    http.finish()
+    return res
+  end
+  
+  def body_ref_cookie(url, ref, adp, range)
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+#    http.set_debug_output $stderr
+    http.start()
+    req = Net::HTTP::Get.new uri
+    req['Cookie'] = "AD-P=#{adp}"
+    req['Referer'] = ref
+    if ! range.nil? then
+      req['Range'] = range
+    end
+    res = http.request(req)
+    http.finish()
+    return res
+  end
+
 end
