@@ -14,15 +14,13 @@ module RadioCloud
   end
   
   def get_tune_info(dom)
-    count = 0
     dom.xpath('//div[@id="contents_open"]//li[@class="contents_box"]').map do |node|
       time = node.xpath('dl/dt').inner_text.strip
       day = time.gsub(/\./ , '_')
       day2 = time.gsub(/\./ , '.')
       caption = day2 + ' ' +node.xpath('dl/dd/span').inner_text.strip
-      filename = day + '_' + count.to_s + '.m4a'
-      count +=1
       tuneurl = url = 'https:' + node.xpath('input[@name="file_url"]/@value').inner_text + '/'
+      filename = node.xpath('input[@name="file_url"]/@value').inner_text.split('/').last + '.m4a'
       [filename, caption, time, tuneurl]
     end
   end
