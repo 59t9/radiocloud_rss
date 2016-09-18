@@ -42,6 +42,8 @@ class PodcastRssGenerator
       a['time'] <=> b['time']
     end
     
+    title = title.encode(xml: :text)
+
     html = <<-EOS
 <?xml version="1.0" encoding="utf-8"?>
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
@@ -50,17 +52,17 @@ class PodcastRssGenerator
 EOS
     
     urls.each do |item|
-      url = location + item['fname']
+      url = location.encode(xml: :text) + item['fname'].encode(xml: :text)
       mime = 'audio/mp4'
       
       html += <<-EOS
     <item>
-      <title>#{item['name']}</title>
-      <enclosure url="#{url}"
-                 length="#{item['length']}"
-                 type="#{mime}" />
-      <guid isPermaLink="true">#{url}</guid>
-      <pubDate>#{item['time'].rfc822}</pubDate>
+      <title>#{item['name'].encode(xml: :text)}</title>
+      <enclosure url="#{url.encode(xml: :text)}"
+                 length="#{item['length'].encode(xml: :text)}"
+                 type="#{mime.encode(xml: :text)}" />
+      <guid isPermaLink="true">#{url.encode(xml: :text)}</guid>
+      <pubDate>#{item['time'].rfc822.encode(xml: :text)}</pubDate>
     </item>
     EOS
     end
