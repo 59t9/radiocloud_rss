@@ -17,10 +17,10 @@ module RadioCloud
     dom.xpath('//div[@id="contents_open"]//li[@class="contents_box"]').map do |node|
       time = node.xpath('dl/dt').inner_text.strip
       day = time.gsub(/\./ , '_')
-      day2 = time.gsub(/\./ , '.')
+      day2 = time
       caption = day2 + ' ' +node.xpath('dl/dd/span').inner_text.strip
       tuneurl = url = 'https:' + node.xpath('input[@name="file_url"]/@value').inner_text + '/'
-      filename = node.xpath('input[@name="file_url"]/@value').inner_text.split('/').last + '.m4a'
+      filename = node.xpath('input[@name="content_id"]/@value').inner_text + '.m4a'
       [filename, caption, time, tuneurl]
     end
   end
