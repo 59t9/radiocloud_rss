@@ -15,7 +15,7 @@ module RadioCloud
   
   def get_tune_info(dom)
     dom.xpath('//div[@id="contents_open"]//li[@class="contents_box"]').map do |node|
-      time = node.xpath('dl/dt').inner_text.strip + ' +0900'
+      time = node.xpath('dl/dt').inner_text.strip + ' 00:00:00 +0900'
       day = time.gsub(/\./ , '_')
       day2 = time
       caption = day2 + ' ' +node.xpath('dl/dd/span').inner_text.strip
