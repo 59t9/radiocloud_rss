@@ -29,7 +29,7 @@ class PodcastRssGenerator
     urls = []
     Parallel.map(arr_tuneinfo[0...episodes_limit], in_threads: 4) do |filename, caption, time, tuneurl|
       path = filename + '?' + 'tuneid=' + tuneurl + '&amp;' + 'refsite=' + refsite + '&amp;' + 'filename=' + filename
-      time_length = get_time_length(tuneurl, refsite, time)
+      time_length = get_time_length(tuneurl, refsite, time + ' 00:00:00 +0900')
       item = { 'name'   => caption,
         'fname'  => path,
         'time'   => Time.parse(time_length[:time]),
